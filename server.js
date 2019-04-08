@@ -66,3 +66,19 @@ server.put('/api/modify/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// Delete a specific record
+server.delete('/api/remove/:id', (req, res) => {
+  const { id } = req.params;
+  db('restaurants')
+    .where({ id })
+    .del()
+    .then(count => {
+      // count === number of records deleted
+      res.status(200).json(count);
+      console.log("DELETE request complete")
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
