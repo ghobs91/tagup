@@ -19,3 +19,16 @@ server.get('/api/list', (req, res) => {
       res.status(500).json({ error: "Error retrieving restaurants", info: error })
   });
 });
+
+// Read a specific record
+server.get('/api/read/:id', (req, res) => {
+  const { id } = req.params;
+  db('restaurants')
+    .where({ id })
+    .then(restaurant => {
+      res.status(200).json(restaurant);
+      console.log('GET request by ID complete')
+    }).catch(error => {
+        res.status(500).json({ error: "Error retrieving restaurants", info: error })
+    });
+});
