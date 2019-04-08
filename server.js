@@ -32,3 +32,37 @@ server.get('/api/read/:id', (req, res) => {
         res.status(500).json({ error: "Error retrieving restaurants", info: error })
     });
 });
+
+// Create a record
+server.post('/api/create', (req, res) => {
+  const restaurant = req.body;
+
+  db.insert(restaurant)
+    .into('restaurants')
+    .then(ids => {
+      res.status(201).json(ids[0]);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
+// Update a specific record
+server.put('/api/modify/:id', (req, res) => {
+  const changes = req.body;
+  const { id } = req.params;
+
+  db('restaurants')
+    .where({ id })
+    .update(changes)
+    .update({
+      lastModificationDate: Date.now()
+    })
+    .then(count => {
+      // count === number of records updated
+      res.status(200).json(count);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
