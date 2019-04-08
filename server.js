@@ -3,7 +3,7 @@ const express = require('express'); // import the express package
 
 const server = express(); // creates the server
 server.use(express.json());
-
+server.use(cors())
 // Knex config
 const knex = require('knex');
 const knexConfig = require('./knexfile');
