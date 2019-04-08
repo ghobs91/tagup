@@ -1,5 +1,7 @@
 # tagup
 
+Base URL: https://competent-lumiere-93f42c.netlify.com/
+
 | Route           | Description              |
 |-----------------|--------------------------|
 | /api/list       | Lists all the records    |
